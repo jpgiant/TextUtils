@@ -4,8 +4,7 @@ import TextForm from "./components/TextForm";
 import Alerts from "./components/Alerts";
 import About from "./components/About";
 import React, { useState } from "react";
-import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
 function App() {
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null);
@@ -36,6 +35,7 @@ function App() {
   return (
     <>
       <Navbar title={"Texto"} mode={mode} toggleMode={toggleMode} />
+      <Alerts alert={alert} />
       <Routes>
         <Route
           path="/"
@@ -47,9 +47,8 @@ function App() {
             />
           }
         />
-        <Route path="about" element={<About />} />
+        <Route path="about" element={<About mode={mode} />} />
       </Routes>
-      <Alerts alert={alert} />
     </>
   );
 }

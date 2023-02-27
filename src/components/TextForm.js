@@ -36,11 +36,14 @@ export default function TextForm({ heading, mode, showAlert }) {
     showAlert(" Extra spaces have been removed.","success")
 
   };
+  const countCharacters=(str)=>{
+    return str.length;
+  }
   const countWords = (str) => {
     if (str.length === 0) {
       return wordCount;
     } else {
-      return str.split(" ").length;
+      return str.split(" ").filter((element)=>{return element.length!==0}).length;
     }
   };
   const initalLetterCapital = () => {
@@ -73,36 +76,39 @@ export default function TextForm({ heading, mode, showAlert }) {
             placeholder="Enter some text here..."
             spellCheck="false"
             style={{
-              backgroundColor: mode === "light" ? "white" : "grey",
+              backgroundColor: mode === "light" ? "white" : "#1e2f54",
               color: mode === "light" ? "#0d0739" : "white",
             }}
           >
           </textarea>
           <div>
-            <button className="btn btn-primary mt-4 " onClick={handleUpClick}>
+            <button className="btn btn-primary mt-4 " onClick={handleUpClick} disabled={text.length===0}>
               Convert to Uppercase
             </button>
             <button
               className="btn btn-primary mt-4 mx-2"
               onClick={handleLowClick}
+              disabled={text.length===0}
             >
               Convert to Lowercase
             </button>
-            <button className="btn btn-primary mt-4 mx-2" onClick={handleCopy}>
+            <button className="btn btn-primary mt-4 mx-2" onClick={handleCopy} disabled={text.length===0}>
               Copy to Clipboard
             </button>
-            <button className="btn btn-primary mt-4 mx-2" onClick={removeSpace}>
+            <button className="btn btn-primary mt-4 mx-2" onClick={removeSpace} disabled={text.length===0}>
               Remove Extra Spaces
             </button>
             <button
               className="btn btn-primary mt-4 mx-2"
               onClick={initalLetterCapital}
+              disabled={text.length===0}
             >
               Make Initial Letter Capital
             </button>
             <button
               className="btn btn-primary mt-4 mx-2"
               onClick={resetButtonAction}
+              disabled={text.length===0}
             >
               Reset
             </button>
@@ -115,11 +121,11 @@ export default function TextForm({ heading, mode, showAlert }) {
         <h2 className="my-3">Text Summary</h2>
         <p>
           There are total <b>{countWords(text)} words </b> in the text
-          consisting of <b>{text.length} characters</b>.
+          consisting of <b>{countCharacters(text)} characters</b>.
         </p>
         <p>{(countWords(text) / 160).toFixed(2)} minute(s) read.</p>
         <h2>Text Preview</h2>
-        <p>{text.length>0?text:"Enter some text in the text-box to preview it here"}</p>
+        <p>{text.length>0?text:"Nothing to preview"}</p>
       </div>
     </>
   );
