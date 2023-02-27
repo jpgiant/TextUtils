@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar({ title, mode, toggleMode }) {
   return (
     <nav className={`navbar navbar-expand-lg bg-${mode} navbar-${mode}`}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <b>{title}</b>
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,14 +23,16 @@ export default function Navbar({ title, mode, toggleMode }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
+              <Link className="nav-link active" aria-current="page" to="/">
                 Home
-              </a>
+                {/* <NavLink to={"/"}>Home</NavLink> */}
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">
+              <Link className="nav-link" to="/about">
                 About
-              </a>
+                {/* <NavLink to={"/about"}>About</NavLink> */}
+              </Link>
             </li>
           </ul>
           {/* <form className="d-flex" role="search">
@@ -43,13 +46,19 @@ export default function Navbar({ title, mode, toggleMode }) {
               Search
             </button>
           </form> */}
-          <div className={`form-check form-switch text-${mode==='light'?'dark':'light'}`}>
+          <div
+            className={`form-check form-switch text-${
+              mode === "light" ? "dark" : "light"
+            }`}
+          >
             <input
               className="form-check-input"
               type="checkbox"
               role="switch"
               id="flexSwitchCheckDefault"
-              onClick={()=>{toggleMode()}}
+              onClick={() => {
+                toggleMode();
+              }}
             />
             <label
               className={`form-check-label`}
