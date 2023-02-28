@@ -16,20 +16,20 @@ function App() {
     });
     setTimeout(() => {
       setAlert(null);
-    }, 2000);
+    }, 1000);
   };
 
-  const toggleMode = () => {
+
+  const toggleMode = (cls) => {
+    document.body.classList.add("bg-" + cls);
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#0d0739";
       showAlert(" Dark Mode has been enabled", "success");
-      // document.title='Texto (Dark Mode)'
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
       showAlert(" Light Mode has been enabled", "success");
-      // document.title='Texto (Light Mode)'
     }
   };
   return (

@@ -18,9 +18,7 @@ export default function TextForm({ heading, mode, showAlert }) {
     setText(e.target.value);
   };
   const handleCopy = async () => {
-    // console.log("Copied to Clipboard")
     const textBoxContent = document.getElementById("textBox").innerHTML;
-    // console.log(textBoxContent)
     try {
       await navigator.clipboard.writeText(textBoxContent);
     showAlert(" Text has been copied to clipboard.","success")
@@ -30,7 +28,6 @@ export default function TextForm({ heading, mode, showAlert }) {
     }
   };
   const removeSpace = () => {
-    // console.log("Pressed")
     const newText = text.split(/[ ]+/);
     setText(newText.join(" "));
     showAlert(" Extra spaces have been removed.","success")
@@ -43,7 +40,7 @@ export default function TextForm({ heading, mode, showAlert }) {
     if (str.length === 0) {
       return wordCount;
     } else {
-      return str.split(" ").filter((element)=>{return element.length!==0}).length;
+      return str.split(/\s+/).filter((element)=>{return element.length!==0}).length;
     }
   };
   const initalLetterCapital = () => {
